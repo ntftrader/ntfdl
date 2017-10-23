@@ -12,6 +12,7 @@ stl.trades.price.plot(drawstyle='steps')
 plt.title("Statoil ASA (STL.OSE)")
 ```
 ![Notebook example](examples/img/nb_stl.png)
+
  The norwegian broker Netfonds ASA kindly makes 15 minute delayed intraday data (up to 20 days) as well as historical data available freely as csv files.
 
  This package uses Pandas for most of the retrival and processing. And most of the data returned are as Pandas dataframe.
@@ -44,8 +45,7 @@ see [examples/techan.js/](examples/notebooks)
 ## Contributing
 Find bugs - create issues!
 
-Contribute code by forking and
-
+Contribute code by forking the repo and submit PR's
 
 
 ## Package ntfdl
