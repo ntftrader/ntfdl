@@ -13,6 +13,7 @@ lib64
 include/
 pip-selfcheck.json
 ntfdl/.idea
+examples/notebooks/ntfdl
 
 # Distribution / packaging
 .Python
