@@ -1,6 +1,6 @@
 # Techan.js example
 
-This example has borrowed one of Techan.js' examples with some slight modifications so it will read dataframes generated from ntfdl and exported as csv files with Pandas DataFrame.to_csv.
+This example is based on one of Techan.js' examples, with some slight modifications so it will read dataframes generated from ntfdl and exported as csv files with Pandas DataFrame.to_csv.
 
 There is a file generated with ntfdl `stl.csv` for Statoil ASA in this example.
 
