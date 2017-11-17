@@ -18,18 +18,26 @@ class multi():
             for n in range((start_date - end_date).days + 1):
                 yield start_date - datetime.timedelta(n)
 
+    def _dates(self, start, end):
+
+        if isinstance(start, datetime.datetime) and isinstance(end, datetime.datetime):
+            pass
+        else:
+            start = datetime.datetime.strptime(start, '%Y%m%d')
+            end = datetime.datetime.strptime(end, '%Y%m%d')
+
+        return start.date(), end.date()
 
     def get_trades(self, start, end):
         """Uses dl to download and appends each day with data"""
 
-        start = datetime.datetime.strptime(start, '%Y%m%d').date()
-        end = datetime.datetime.strptime(end, '%Y%m%d').date()
+        start, end = self._dates(start, end)
 
         for date in self._daterange(start, end):
 
             if date.isoweekday() not in [6,7]:
                 #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date.__format__("%Y%m%d"))
+                i = dl(self.instrument, self.exchange, day=date)
 
                 data = i.get_trades()
 
@@ -45,14 +53,13 @@ class multi():
     def get_ohlcv(self, start, end, interval='5min'):
         """Uses dl to download and appends each day with data"""
 
-        start = datetime.datetime.strptime(start, '%Y%m%d').date()
-        end = datetime.datetime.strptime(end, '%Y%m%d').date()
+        start, end = self._dates(start, end)
 
         for date in self._daterange(start, end):
 
             if date.isoweekday() not in [6, 7]:
                 #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date.__format__("%Y%m%d"), download=True)
+                i = dl(self.instrument, self.exchange, day=date, download=True)
 
                 data = i.get_ohlcv(interval)
 
@@ -68,14 +75,13 @@ class multi():
     def get_positions(self, start, end):
         """Uses dl to download and appends each day with data"""
 
-        start = datetime.datetime.strptime(start, '%Y%m%d').date()
-        end = datetime.datetime.strptime(end, '%Y%m%d').date()
+        start, end = self._dates(start, end)
 
         for date in self._daterange(start, end):
 
             if date.isoweekday() not in [6,7]:
                 #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date.__format__("%Y%m%d"))
+                i = dl(self.instrument, self.exchange, day=date)
 
                 data = i.get_positions()
 

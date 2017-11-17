@@ -42,11 +42,13 @@ class dl:
         @TODO: verify date, verify not weekend, verify open exchange that day"""
 
         if day == "today":
-            self.date = datetime.datetime.now().strftime('%Y%m%d')
-        elif isinstance(day, datetime.datetime):
-            self.date = datetime.now().strftime('%Y%m%d')
-        else:
+            self.date = datetime.datetime.now()
+        elif isinstance(day, datetime.datetime) or isinstance(day, datetime.date):
             self.date = day
+        else:
+            self.date = datetime.datetime.strptime(day, '%Y%m%d')
+
+        self.date = self.date.strftime('%Y%m%d')
 
         self.exchange_pre = '%s 08:15:00' % self.date
         self.exchange_open = '%s 09:00:00' % self.date
