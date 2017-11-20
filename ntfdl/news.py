@@ -8,8 +8,7 @@ import time
 import json
 
 
-class news(object):
-
+class News(object):
     def __init__(self, instrument, exchange='OSE'):
 
         self.instrument = instrument
@@ -29,20 +28,20 @@ class news(object):
                     if not url.attrs['href'].startswith('javascript'):
                         links.append("http://www.newsweb.no%s" % url.attrs['href'])
 
-        content = l[len(l)-1].find('pre').get_text()
-        #found_pdf_urls = [link["href"] for link in l.find_all("a", href=True) if link["href"].endswith(".pdf")]
+        content = l[len(l) - 1].find('pre').get_text()
+        # found_pdf_urls = [link["href"] for link in l.find_all("a", href=True) if link["href"].endswith(".pdf")]
 
         return content, links
-
 
     def get_news(self, date='today', days=365):
 
         if date == "today":
-            self.date = datetime.now().strftime('%Y%m%d')
+            date = datetime.now().strftime('%Y%m%d')
         elif isinstance(date, datetime):
-            self.date = datetime.now().strftime('%Y%m%d')
+            date = date.strftime('%Y%m%d')
 
-        html = request.get('http://www.netfonds.no/quotes/releases.php?date=%s&days=%i&paper=%s&exchange=%s&search=' % (date, days, self.instrument, self.exchange))
+        html = request.get('http://www.netfonds.no/quotes/releases.php?date=%s&days=%i&paper=%s&exchange=%s&search=' % (
+        date, days, self.instrument, self.exchange))
 
         s = bs(html.text, "lxml")
 
@@ -66,7 +65,7 @@ class news(object):
                     n['title'] = re.sub(r'\([^)]*\)', '', cell.get_text())
 
                     r = re.findall(r'\((.*?)\)', cell.get_text())
-                    n['provider'] = r[len(r)-1]
+                    n['provider'] = r[len(r) - 1]
 
                     url = cell.find('a', href=True)
                     if url:
@@ -78,15 +77,14 @@ class news(object):
                                 news = ext.find('div', class_='hcontent').find_all('p')[0].find('a', href=True)
                             if news and news.has_attr('href'):
                                 n['url'] = news.attrs['href']
-                                #@TODO should download from site by provider and get text with news.
+                                # @TODO should download from site by provider and get text with news.
                                 if n['provider'] == 'OBI':
                                     txt, links = self._get_newsweb(n['url'])
                                     n['content'] = {'text': txt, 'links': links}
                             else:
                                 n['url'] = None
 
-
-                i = i +1
+                i = i + 1
 
             if len(n) > 0:
                 all_news.append(n)

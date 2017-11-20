@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 
 
-class dl:
+class Dl:
     trades = None
     positions = None
     history = None

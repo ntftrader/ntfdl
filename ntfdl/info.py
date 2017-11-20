@@ -8,10 +8,8 @@ import time
 import json
 
 
-class info(object):
-
+class Info(object):
     def __init__(self, instrument, exchange='OSE'):
-
 
         html = request.get('http://www.netfonds.no/quotes/about.php?paper=%s.%s' % (instrument, exchange))
         s = bs(html.text, "lxml")
@@ -63,7 +61,7 @@ class info(object):
                 elif skey == 11:
                     value = float(cell.get_text().strip())
                 elif skey in [12, 13, 14]:
-                    value = int(cell.get_text().replace(' ',''))
+                    value = int(cell.get_text().replace(' ', ''))
                 elif skey == 16:
                     value = cell.get_text().replace(' ', '')
                 else:
@@ -74,7 +72,6 @@ class info(object):
         # Assign dictionary to properties
         for k, v in self.info.items():
             setattr(self, k, v)
-
 
     def get_info(self):
         return self.info
@@ -90,4 +87,3 @@ class info(object):
         return {1: self.info.get('index1', None),
                 2: self.info.get('index2', None),
                 3: self.info.get('index3', None)}
-

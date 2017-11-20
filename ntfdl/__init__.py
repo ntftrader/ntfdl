@@ -1,4 +1,5 @@
-from .ntfdl import dl
-from .news import news
-from .info import info
-from .multi import multi
+from .ntfdl import Dl
+from .multi import Multi
+from .news import News
+from .info import Info
+

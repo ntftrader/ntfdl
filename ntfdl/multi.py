@@ -1,9 +1,9 @@
-from ntfdl import dl
+from ntfdl import Dl
 import pandas as pd
 import datetime
 
-class multi():
 
+class Multi():
     def __init__(self, instrument, exchange='OSE'):
 
         self.instrument = instrument
@@ -35,9 +35,9 @@ class multi():
 
         for date in self._daterange(start, end):
 
-            if date.isoweekday() not in [6,7]:
-                #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date)
+            if date.isoweekday() not in [6, 7]:
+                # print(date.__format__("%Y%m%d"))
+                i = Dl(self.instrument, self.exchange, day=date)
 
                 data = i.get_trades()
 
@@ -49,7 +49,6 @@ class multi():
 
         return trades
 
-
     def get_ohlcv(self, start, end, interval='5min'):
         """Uses dl to download and appends each day with data"""
 
@@ -58,8 +57,8 @@ class multi():
         for date in self._daterange(start, end):
 
             if date.isoweekday() not in [6, 7]:
-                #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date, download=True)
+                # print(date.__format__("%Y%m%d"))
+                i = Dl(self.instrument, self.exchange, day=date, download=True)
 
                 data = i.get_ohlcv(interval)
 
@@ -71,7 +70,6 @@ class multi():
 
         return ohlcv
 
-
     def get_positions(self, start, end):
         """Uses dl to download and appends each day with data"""
 
@@ -79,9 +77,9 @@ class multi():
 
         for date in self._daterange(start, end):
 
-            if date.isoweekday() not in [6,7]:
-                #print(date.__format__("%Y%m%d"))
-                i = dl(self.instrument, self.exchange, day=date)
+            if date.isoweekday() not in [6, 7]:
+                # print(date.__format__("%Y%m%d"))
+                i = Dl(self.instrument, self.exchange, day=date)
 
                 data = i.get_positions()
 
@@ -92,6 +90,3 @@ class multi():
                         positions = data
 
         return positions
-
-
-
