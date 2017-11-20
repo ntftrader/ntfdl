@@ -10,7 +10,7 @@ There is a file generated with ntfdl `stl.csv` for Statoil ASA in this example.
 ## Exporting trade data as csv for Techan.js
 
 ```
-from ntfdl import multi
+from ntfdl import Multi
 
 # We are going to get data for Statoil ASA (STL.OSE)
 stl = multi(instrument='STL', exchange='OSE')

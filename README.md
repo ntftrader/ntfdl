@@ -1,9 +1,9 @@
 # ntfdl
- A python Netfonds intraday and history data downloader and processor.
+A python Netfonds intraday and history data downloader and processor.
 
- ```
- from ntfdl import dl
- stl = dl('STL', exchange='OSE', download=True)
+```
+ from ntfdl import Dl
+ stl = Dl('STL', exchange='OSE', download=True)
  stl.trades.tail()
  ```
  ![Pandas dataframe](examples/img/trades_dataframe.png)
@@ -13,9 +13,11 @@ plt.title("Statoil ASA (STL.OSE)")
 ```
 ![Notebook example](examples/img/nb_stl.png)
 
- The norwegian broker Netfonds ASA kindly makes 15 minute delayed intraday data (up to 20 days) as well as historical data available freely as csv files.
+The norwegian broker Netfonds ASA kindly makes 15 minute delayed intraday data (up to 20 days) as well as historical data available freely as csv files.
 
- This package uses Pandas for most of the retrival and processing. And most of the data returned are as Pandas dataframe.
+See [Netfonds marketplaces](http://www.netfonds.no/quotes/market.php) for supported marketplaces.
+
+ This package uses Pandas and most returned data is a Pandas dataframe. News and Info uses bs4.
 
  Author is not connected or affiliated with Netfonds ASA.
 
@@ -27,8 +29,19 @@ plt.title("Statoil ASA (STL.OSE)")
  - retrieving news for instrument
  - retrieving info for instrument
 
+ Do not (yet) support:
+ - Currencies
+ - Commodities
+
+
 ## Install
+Ntfdl is only available from github, but if any interest I'll put it on PyPi (make an issue)
+
 Clone or download package.
+
+```
+git clone https://github.com/ntftrader/ntfdl.git
+```
 
 You can make it a virtualenv by:
 ```
@@ -42,11 +55,8 @@ source bin/activate
 ```
 
 Make sure Pandas package is installed:
-```pip install pandas```
-
 ```
-pip install .
-#or 'pip install -e .' which will install as symlink
+pip install pandas
 ```
 
 To run the Jupyter notebooks, Jupyter needs to be installed.
@@ -74,12 +84,12 @@ Contribute code by forking the repo and submit PR's
 
 ## Package ntfdl
 
-### ntfdl.dl
+### ntfdl.Dl
 
-### ntfdl.multi
+### ntfdl.Multi
 
-### ntfdl.news
+### ntfdl.News & ntfdl.Info
+Requires bs4 to be installed ```pip install bs4```.
 
-### ntfdl.info
-Note: Naive implementation and will not work for exchanges except OSE, OAX and Merkur (Norwegian Stock Exchange marketplaces)
+Note: Naive implementation and will not work for exchanges except the norwegian OSE, OAX and Merkur (Norwegian Stock Exchange marketplaces)
 
