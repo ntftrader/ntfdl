@@ -8,4 +8,5 @@ setup(name='ntfdl',
       author_email='ntftrader@gmail.com',
       license='MIT',
       packages=['ntfdl'],
+      install_requires=['pandas', 'bs4'],
       zip_safe=False)
